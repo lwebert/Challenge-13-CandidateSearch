@@ -3,18 +3,20 @@ import { useState, useEffect } from 'react'; //Gave us this import!
 // import { searchGithub, searchGithubUser } from '../api/API'; //Gave us this import!
 import { searchGithub } from '../api/API';
 
-import type Candidate from '../interfaces/Candidate.interface';
+import {type CandidateSummary} from '../interfaces/Candidate.interface';
 import CandidateCard from '../components/CandidateCard';
+import SavedCandidates from './SavedCandidates';
 
 const CandidateSearch = () => {
 	// return <h1>CandidateSearch</h1>;
 
 	//useState = Hook (prebuilt in react library) that returns (initializes) 2 things - a state variable (where data is stored) & a state function (to update data in the variable)
-	const [users, setUsers] = useState<Candidate[]>([]); //when page 1st loads, make users an empty array
+	const [users, setUsers] = useState<CandidateSummary[]>([]); //when page 1st loads, make users an empty array
 	const [savedUsers, setSavedUsers] = useState<string[]>([]);
-	const [currentUser, setCurrentUser] = useState<Candidate | undefined>(
+	const [currentUser, setCurrentUser] = useState<CandidateSummary | undefined>(
 		undefined
 	);
+	const [showSelectedUsers, setShowSelectedUsers] = useState(false);
 
 	//useEffect
 	useEffect(() => {
@@ -34,10 +36,6 @@ const CandidateSearch = () => {
 				console.log('Error fetching users: ', err);
 			});
 	}, []); //leave dependency array empty - only triggers when page loads the 1st time () since the empty array isn't going to change
-
-	useEffect(() => {
-		console.log('Saved Users: ', savedUsers);
-	}, [savedUsers]); //dependency array for use effect, triggers anytime savedUsers variable changes (which is everytime you run setSavedUsers function)
 
 	//functions
 	const findUserIndex = () => {
@@ -84,17 +82,32 @@ const CandidateSearch = () => {
 		setCurrentUser(users[currentIndex + 1]);
 	};
 
+	const handleToggleSelectedUsers = () => {
+		setShowSelectedUsers(!showSelectedUsers);
+	};
+
 	return (
 		<div>
-			<h1>Candidate Search</h1>
-			{currentUser ? (
-				<div>
-					<CandidateCard username={currentUser.login} />
-					<button onClick={handleRejectUser}>Reject User</button>
+			<button onClick={handleToggleSelectedUsers}>{showSelectedUsers ? 'Return To User Search' :'Show Saved Users'} </button>
 
-					<button onClick={handleSaveUser}>Save User</button>
+			{showSelectedUsers ? (
+				
+				<SavedCandidates usernames={savedUsers} />
+			) : (
+				<div>
+					<h1>Candidate Search</h1>
+					{currentUser ? (
+						<div>
+							<CandidateCard username={currentUser.login} />
+							<button onClick={handleRejectUser}>
+								Reject User
+							</button>
+
+							<button onClick={handleSaveUser}>Save User</button>
+						</div>
+					) : null}
 				</div>
-			) : null}
+			)}
 		</div>
 	);
 };

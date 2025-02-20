@@ -17,10 +17,10 @@ const router = createBrowserRouter([
         index: true,
         element: <CandidateSearch />,
       },
-      {
-        path: '/SavedCandidates',
-        element: <SavedCandidates />,
-      },
+      // {
+      //   path: '/SavedCandidates',
+      //   element: <SavedCandidates />,
+      // },
     ],
   },
 ]);

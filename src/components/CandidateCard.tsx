@@ -1,4 +1,4 @@
-// import type React from 'react';
+import BounceLoader from 'react-spinners/BounceLoader';
 // import type Candidate from '../interfaces/Candidate.interface';
 
 // import { ImCross } from 'react-icons/im';
@@ -13,9 +13,12 @@ type CandidateProps = {
 
 const CandidateCard = ({ username }: CandidateProps) => {
 	//Code to search for the user based on the username
+
+	const [loading, setLoading] = useState(false);
 	const [loadedUser, setLoadedUser] = useState<any>(undefined);
 
 	useEffect(() => {
+		setLoading(true);
 		const initialize = async () => {
 			const data = await searchGithubUser(username);
 			return data;
@@ -24,6 +27,7 @@ const CandidateCard = ({ username }: CandidateProps) => {
 		initialize() //data
 			.then((result) => {
 				setLoadedUser(result);
+				setLoading(false);
 			})
 			.catch((err: any) => {
 				console.log('Error fetching users: ', err);
@@ -39,7 +43,10 @@ const CandidateCard = ({ username }: CandidateProps) => {
 	}
 
 	return (
-		<div className="card">
+		loading ? (
+			<BounceLoader color='#FFFFFF' />
+		) : (
+			<div className="card">
 			<img src={loadedUser?.avatar_url}></img>
 			<h2>{loadedUser?.name ? loadedUser.name : loadedUser?.login}</h2>
 			{/* //TODO: fix this later to always have the "Location: " and such... */}
@@ -76,6 +83,7 @@ const CandidateCard = ({ username }: CandidateProps) => {
 				<p>No Bio found to render</p>
 			)}
 		</div>
+		)
 	);
 };
 
