@@ -1,25 +1,24 @@
-// import { Link, useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
-type NavProp = {
-	showSavedCandidates: boolean;
-	setShowSaveCandidates: (value: boolean) => void;
-};
+// type NavProp = {
+// 	showSavedCandidates: boolean;
+// 	setShowSaveCandidates: (value: boolean) => void;
+// };
 
-const Nav = ({showSavedCandidates, setShowSaveCandidates}: NavProp) => {
-	// TODO: Add necessary code to display the navigation bar and link between the pages
-	// const currentPage = useLocation().pathname;
+// const Nav = ({ showSavedCandidates, setShowSaveCandidates }: NavProp) => {
+const Nav = () => {
+	const currentPage = useLocation().pathname;
 
-	// return <div>Nav</div>;
 	return (
 		<nav>
 			<h1>
-				<Link to="/">Title?</Link>
+				<Link to="/" >Candidate Search</Link>
 			</h1>
 			<ul className="nav nav-tabs">
 				<li className="nav-item">
 					<h2>
-						{/* <Link
+						<Link
 							to="/"
 							className={
 								currentPage === '/'
@@ -27,26 +26,35 @@ const Nav = ({showSavedCandidates, setShowSaveCandidates}: NavProp) => {
 									: 'nav-link'
 							}>
 							HOME
-						</Link> */}
-						<button
+						</Link>
+						{/* <button
 						onClick={() => setShowSaveCandidates(false)}
 						style={
 							showSavedCandidates ? styles['button']: styles['button-active'] 
 						}>
 							HOME
-						</button>
+						</button> */}
 					</h2>
 				</li>
 				<li className="nav-item">
 					<h2>
-						<button
+						<Link
+							to="/SavedCandidates"
+							className={
+								currentPage === '/SavedCandidates'
+									? 'nav-link active'
+									: 'nav-link'
+							}>
+								Saved Candidates
+							</Link>
+						{/* <button
 							style={
 								showSavedCandidates ? styles['button-active'] : styles['button']
 							}
 							onClick={() => setShowSaveCandidates(true)}
 						>
 							Potential Candidates
-						</button>
+						</button> */}
 					</h2>
 				</li>
 			</ul>
@@ -54,23 +62,23 @@ const Nav = ({showSavedCandidates, setShowSaveCandidates}: NavProp) => {
 	);
 };
 
-const styles: {[key: string]: any} = {
-	button: {
-		background: 'inherit',
-		color: 'inherit',
-		border: 'none',
-		padding: 0,
-		font: 'inherit',
-		outline: 'inherit'
-	},
-	'button-active': {
-		background: 'white',
-		color: 'inherit',
-		border: 'none',
-		padding: 0,
-		font: 'inherit',
-		outline: 'inherit'
-	}
-}
+// const styles: { [key: string]: any } = {
+// 	button: {
+// 		background: 'inherit',
+// 		color: 'inherit',
+// 		border: 'none',
+// 		padding: 0,
+// 		font: 'inherit',
+// 		outline: 'inherit',
+// 	},
+// 	'button-active': {
+// 		background: 'white',
+// 		color: 'inherit',
+// 		border: 'none',
+// 		padding: 0,
+// 		font: 'inherit',
+// 		outline: 'inherit',
+// 	},
+// };
 
 export default Nav;

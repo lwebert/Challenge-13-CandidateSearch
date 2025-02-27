@@ -3,8 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
 import App from './App.tsx';
-// import CandidateSearch from './pages/CandidateSearch/index.tsx';
-// import SavedCandidates from './pages/SavedCandidates.tsx';
+import CandidateSearch from './pages/CandidateSearch/index.tsx';
+import SavedCandidates from './pages/SavedCandidates/index.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 
 const router = createBrowserRouter([
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       // {
       //   index: true,
-      //   element: <CandidateSearch />,
+      //   element: <CandidateSearch showSavedCandidates={showSavedCandidates}/>,
       // },
       // {
       //   path: '/SavedCandidates',

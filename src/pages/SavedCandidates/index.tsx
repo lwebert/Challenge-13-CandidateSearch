@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { searchGithubUser } from '../../api/API'; 
+import { searchGithubUser } from '../../api/API';
 import BounceLoader from 'react-spinners/BounceLoader';
 // import { type CandidateDetails } from '../interfaces/Candidate.interface';
 import './SavedCandidates.css';
@@ -62,69 +62,118 @@ const SavedCandidates = ({ usernames }: Props) => {
 			{loading ? (
 				<BounceLoader color="#FFFFFF" />
 			) : (
-				//TODO: style container for table
-				<div className="table-container">
-					<div className="table-row-black">
-						<div>Image</div>
+				<table>
+					<tr>
+						<th>Image</th>
+						<th>Name</th>
+						<th>Location</th>
+						<th>Email</th>
+						<th>Company</th>
+						<th>Bio</th>
+						<th>Reject</th>
+					</tr>
+					<tbody>
+						{users.map((user, index) => (
+							<tr key={index}>
+								<td>
+									<img
+										src={user?.avatar_url}
+										className="table-row-image"
+									/>
+								</td>
+								<td>
+									{user.name ? user.name : 'No name found.'}
+								</td>
+								<td>
+									{user.location
+										? user.location
+										: 'No location found.'}
+								</td>
+								<td>
+									{user.email
+										? user.email
+										: 'No email found.'}
+								</td>
+								<td>
+									{user.company
+										? user.company
+										: 'No company found.'}
+								</td>
+								<td>{user.bio ? user.bio : 'No bio found.'}</td>
 
-						<div>Name</div>
+								<td>
+									<button
+										onClick={() =>
+											handleRemoveUser(user.id)
+										}></button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
 
-						<div>Location</div>
+				// <div className="table-container">
+				// 	<div className="table-row-black">
+				// 		<div>Image</div>
 
-						<div>Email</div>
+				// 		<div>Name</div>
 
-						<div>Company</div>
+				// 		<div>Location</div>
 
-						<div>Bio</div>
+				// 		<div>Email</div>
 
-						<div>Reject</div>
-					</div>
-					{users.map((user, index) => (
-						<div
-							className={
-								index % 2 === 0
-									? 'table-row-gray'
-									: 'table-row-black'
-							}
-							key={index}>
-							<div>
-								<img
-									src={user?.avatar_url}
-									className="table-row-image"
-								/>
-							</div>
+				// 		<div>Company</div>
 
-							<div>
-								{user.name ? user.name : 'No Name found.'}
-							</div>
+				// 		<div>Bio</div>
 
-							<div>
-								{user.location
-									? user.location
-									: 'No location found. '}
-							</div>
+				// 		<div>Reject</div>
+				// 	</div>
+				// 	{users.map((user, index) => (
+				// 		<div
+				// 			className={
+				// 				index % 2 === 0
+				// 					? 'table-row-gray'
+				// 					: 'table-row-black'
+				// 			}
+				// 			key={index}>
+				// 			<div>
+				// 				<img
+				// 					src={user?.avatar_url}
+				// 					className="table-row-image"
+				// 				/>
+				// 			</div>
 
-							<div>{user.email}</div>
+				// 			<div>
+				// 				{user.name ? user.name : 'No Name found.'}
+				// 			</div>
 
-							<div>
-								{user.company
-									? user.company
-									: 'No Company listed'}
-							</div>
+				// 			<div>
+				// 				{user.location
+				// 					? user.location
+				// 					: 'No location found. '}
+				// 			</div>
 
-							<div>
-								{user.bio ? user.bio : 'Nothing to show.'}
-							</div>
+				// 			<div>{user.email}</div>
 
-							<div>
-								<button
-									onClick={() => handleRemoveUser(user.id)}>
-									-
-								</button>
-							</div>
-						</div>
-					))}
-				</div>
+				// 			<div>
+				// 				{user.company
+				// 					? user.company
+				// 					: 'No Company listed'}
+				// 			</div>
+
+				// 			<div>
+				// 				{user.bio ? user.bio : 'Nothing to show.'}
+				// 			</div>
+
+				// 			<div>
+				// 				<button
+				// 					onClick={() => handleRemoveUser(user.id)}>
+				// 					-
+				// 				</button>
+				// 			</div>
+				// 		</div>
+				// 	))}
+				// </div>
 			)}
 		</div>
 	);

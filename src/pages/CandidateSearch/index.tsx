@@ -4,24 +4,23 @@ import { useState, useEffect } from 'react'; //Gave us this import!
 // import { searchGithub, searchGithubUser } from '../api/API'; //Gave us this import!
 import { searchGithub } from '../../api/API';
 
-import {type CandidateSummary} from '../../interfaces/Candidate.interface';
+import { type CandidateSummary } from '../../interfaces/Candidate.interface';
 import CandidateCard from '../../components/CandidateCard';
 import SavedCandidates from '../SavedCandidates/index';
 
-type Props = {
-	showSavedCandidates: boolean;
-};
+// type Props = {
+// 	showSavedCandidates: boolean;
+// };
 
-const CandidateSearch = ({showSavedCandidates}: Props) => {
+// const CandidateSearch = ({ showSavedCandidates }: Props) => {
+const CandidateSearch = () => {
 	// return <h1>CandidateSearch</h1>;
 
 	//useState = Hook (prebuilt in react library) that returns (initializes) 2 things - a state variable (where data is stored) & a state function (to update data in the variable)
 	const [users, setUsers] = useState<CandidateSummary[]>([]); //when page 1st loads, make users an empty array
 	const [savedUsers, setSavedUsers] = useState<string[]>([]);
-	const [currentUser, setCurrentUser] = useState<CandidateSummary | undefined>(
-		undefined
-	);
-	// const [showSelectedUsers, setShowSelectedUsers] = useState(false);
+	const [currentUser, setCurrentUser] = useState<CandidateSummary | undefined>(undefined);
+	const [showSavedCandidates, setShowSavedCandidates] = useState(false);
 
 	//useEffect
 	useEffect(() => {
@@ -96,7 +95,6 @@ const CandidateSearch = ({showSavedCandidates}: Props) => {
 			{/* <button onClick={handleToggleSelectedUsers}>{showSavedCandidates ? 'Return To User Search' :'Show Saved Users'} </button> */}
 
 			{showSavedCandidates ? (
-				
 				<SavedCandidates usernames={savedUsers} />
 			) : (
 				<div>
@@ -115,6 +113,6 @@ const CandidateSearch = ({showSavedCandidates}: Props) => {
 			)}
 		</div>
 	);
-}
+};
 
 export default CandidateSearch;
