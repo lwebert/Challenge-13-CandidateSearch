@@ -1,8 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
+// import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const Nav = () => {
+type NavProp = {
+	showSavedCandidates: boolean;
+	setShowSaveCandidates: (value: boolean) => void;
+};
+
+const Nav = ({showSavedCandidates, setShowSaveCandidates}: NavProp) => {
 	// TODO: Add necessary code to display the navigation bar and link between the pages
-	const currentPage = useLocation().pathname;
+	// const currentPage = useLocation().pathname;
 
 	// return <div>Nav</div>;
 	return (
@@ -13,7 +19,7 @@ const Nav = () => {
 			<ul className="nav nav-tabs">
 				<li className="nav-item">
 					<h2>
-						<Link
+						{/* <Link
 							to="/"
 							className={
 								currentPage === '/'
@@ -21,25 +27,50 @@ const Nav = () => {
 									: 'nav-link'
 							}>
 							HOME
-						</Link>
+						</Link> */}
+						<button
+						onClick={() => setShowSaveCandidates(false)}
+						style={
+							showSavedCandidates ? styles['button']: styles['button-active'] 
+						}>
+							HOME
+						</button>
 					</h2>
 				</li>
 				<li className="nav-item">
 					<h2>
-						<Link
-							to="/SavedCandidates"
-							className={
-								currentPage === '/SavedCandidates'
-									? 'nav-link active'
-									: 'nav-link'
-							}>
+						<button
+							style={
+								showSavedCandidates ? styles['button-active'] : styles['button']
+							}
+							onClick={() => setShowSaveCandidates(true)}
+						>
 							Potential Candidates
-						</Link>
+						</button>
 					</h2>
 				</li>
 			</ul>
 		</nav>
 	);
 };
+
+const styles: {[key: string]: any} = {
+	button: {
+		background: 'inherit',
+		color: 'inherit',
+		border: 'none',
+		padding: 0,
+		font: 'inherit',
+		outline: 'inherit'
+	},
+	'button-active': {
+		background: 'white',
+		color: 'inherit',
+		border: 'none',
+		padding: 0,
+		font: 'inherit',
+		outline: 'inherit'
+	}
+}
 
 export default Nav;

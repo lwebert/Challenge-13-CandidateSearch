@@ -1,0 +1,28 @@
+.table-row-black {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+    background-color: black;
+    color: white;
+}
+
+.table-row-gray {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+    background-color: gray;
+    color: white;
+}
+
+.table-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.table-row-image {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}

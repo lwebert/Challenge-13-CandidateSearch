@@ -34,10 +34,6 @@ const CandidateCard = ({ username }: CandidateProps) => {
 			});
 	}, [username]);
 
-	useEffect(() => {
-		console.log('Loaded user: ', loadedUser);
-	}, [loadedUser]);
-
 	if (!loadedUser) {
 		return null;
 	}
