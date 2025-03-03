@@ -1,3 +1,5 @@
+//TODO: Add local storage
+
 import './CanddiateSearch.css';
 import { useState, useEffect } from 'react'; //Gave us this import!
 
@@ -11,16 +13,17 @@ import SavedCandidates from '../SavedCandidates/index';
 // type Props = {
 // 	showSavedCandidates: boolean;
 // };
-
 // const CandidateSearch = ({ showSavedCandidates }: Props) => {
 const CandidateSearch = () => {
 	// return <h1>CandidateSearch</h1>;
 
 	//useState = Hook (prebuilt in react library) that returns (initializes) 2 things - a state variable (where data is stored) & a state function (to update data in the variable)
 	const [users, setUsers] = useState<CandidateSummary[]>([]); //when page 1st loads, make users an empty array
-	const [savedUsers, setSavedUsers] = useState<string[]>([]);
-	const [currentUser, setCurrentUser] = useState<CandidateSummary | undefined>(undefined);
-	const [showSavedCandidates, setShowSavedCandidates] = useState(false);
+	// const [savedUsers, setSavedUsers] = useState<string[]>([]);
+	const [currentUser, setCurrentUser] = useState<
+		CandidateSummary | undefined
+	>(undefined);
+	// const [showSavedCandidates, setShowSavedCandidates] = useState(false);
 
 	//useEffect
 	useEffect(() => {
@@ -76,13 +79,25 @@ const CandidateSearch = () => {
 			return;
 		}
 
-		const savedUsersClone = [...savedUsers]; //make a copy of this array since it is a readonly variable in the state hook
+		// const savedUsersClone = [...savedUsers]; //make a copy of this array since it is a readonly variable in the state hook
+		// if (currentUser) {
+		// 	savedUsersClone.push(currentUser.login);
+		// }
+		// setSavedUsers(savedUsersClone);
+		// setCurrentUser(users[currentIndex + 1]);
 
-		if (currentUser) {
-			savedUsersClone.push(currentUser.login);
+		let parsedSavedUsers = [];
+		const storedCandidates = localStorage.getItem('savedCandidates');
+
+		if (typeof storedCandidates === 'string') {
+			parsedSavedUsers = JSON.parse(storedCandidates);
 		}
+		parsedSavedUsers.push(currentUser);
+		localStorage.setItem(
+			'savedCandidates',
+			JSON.stringify(parsedSavedUsers)
+		);
 
-		setSavedUsers(savedUsersClone);
 		setCurrentUser(users[currentIndex + 1]);
 	};
 
@@ -94,23 +109,21 @@ const CandidateSearch = () => {
 		<div>
 			{/* <button onClick={handleToggleSelectedUsers}>{showSavedCandidates ? 'Return To User Search' :'Show Saved Users'} </button> */}
 
-			{showSavedCandidates ? (
-				<SavedCandidates usernames={savedUsers} />
-			) : (
-				<div>
-					<h1>Candidate Search</h1>
-					{currentUser ? (
-						<div>
-							<CandidateCard username={currentUser.login} />
-							<button onClick={handleRejectUser}>
-								Reject User
-							</button>
+			{/* {showSavedCandidates ? (
+				// <SavedCandidates usernames={savedUsers} />
+			) : ( */}
+			<div>
+				<h1>Candidate Search</h1>
+				{currentUser ? (
+					<div>
+						<CandidateCard username={currentUser.login} />
+						<button onClick={handleRejectUser}>Reject User</button>
 
-							<button onClick={handleSaveUser}>Save User</button>
-						</div>
-					) : null}
-				</div>
-			)}
+						<button onClick={handleSaveUser}>Save User</button>
+					</div>
+				) : null}
+			</div>
+			{/* )} */}
 		</div>
 	);
 };

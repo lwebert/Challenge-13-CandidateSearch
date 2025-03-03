@@ -25,7 +25,7 @@ const Nav = () => {
 									? 'nav-link active'
 									: 'nav-link'
 							}>
-							HOME
+							Home
 						</Link>
 						{/* <button
 						onClick={() => setShowSaveCandidates(false)}

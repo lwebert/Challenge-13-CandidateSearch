@@ -1,8 +1,8 @@
 import Nav from './components/Nav';
-// import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 // import { useState } from 'react';
-import CandidateSearch from './pages/CandidateSearch/index';
+// import CandidateSearch from './pages/CandidateSearch/index';
 
 function App() {
 	// const [showSavedCandidates, setShowSavedCandidates] = useState(false);
@@ -14,10 +14,10 @@ function App() {
 			// setShowSaveCandidates={setShowSavedCandidates}
 			/>
 			<main>
-				{/* <Outlet /> */}
-				<CandidateSearch
+				<Outlet />
+				{/* <CandidateSearch
 					// showSavedCandidates={showSavedCandidates}
-				/>
+				/> */}
 			</main>
 		</>
 	);

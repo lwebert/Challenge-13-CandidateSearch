@@ -13,14 +13,15 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      // {
-      //   index: true,
-      //   element: <CandidateSearch showSavedCandidates={showSavedCandidates}/>,
-      // },
-      // {
-      //   path: '/SavedCandidates',
-      //   element: <SavedCandidates />,
-      // },
+      {
+        index: true,
+        // element: <CandidateSearch showSavedCandidates={showSavedCandidates}/>,
+        element: <CandidateSearch/>,
+      },
+      {
+        path: '/SavedCandidates',
+        element: <SavedCandidates />,
+      },
     ],
   },
 ]);
