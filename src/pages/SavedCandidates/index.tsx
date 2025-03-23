@@ -35,10 +35,13 @@ const SavedCandidates = () => {
 				);
 			}
 
-			parsedSavedUsers = parsedSavedUsers.filter((candidate: { id: number; }) => {
-				console.log(candidate.id, userId);
-				candidate.id !== userId;
-			});
+			//TODO: fix the filter from overwritting the entire local storage to empty array []
+			parsedSavedUsers = parsedSavedUsers.filter(
+				(candidate: { id: number }) => {
+					console.log(candidate.id, userId);
+					candidate.id !== userId;
+				}
+			);
 
 			console.log('Filtered users: ', parsedSavedUsers);
 
@@ -66,31 +69,32 @@ const SavedCandidates = () => {
 		}
 	}, []);
 
-	useEffect(() => {
-		setLoading(true);
-		const init = async () => {
-			const candidates: any[] = [];
+	//TODO: move some of this code up - searchGithubUser...
+	// useEffect(() => {
+	// 	setLoading(true);
+	// 	const init = async () => {
+	// 		const candidates: any[] = [];
 
-			for (let ii = 0; ii < usernames.length; ii++) {
-				const user = await searchGithubUser(usernames[ii]);
-				console.log('Loaded user: ', user);
-				if (user) {
-					candidates.push(user);
-				}
-			}
+	// 		for (let ii = 0; ii < usernames.length; ii++) {
+	// 			const user = await searchGithubUser(usernames[ii]);
+	// 			console.log('Loaded user: ', user);
+	// 			if (user) {
+	// 				candidates.push(user);
+	// 			}
+	// 		}
 
-			return candidates;
-		};
+	// 		return candidates;
+	// 	};
 
-		init()
-			.then((result) => {
-				setUsers(result);
-				setLoading(false);
-			})
-			.catch((err) => {
-				console.log('Unable to fetch users', err);
-			});
-	}, [users]);
+	// 	init()
+	// 		.then((result) => {
+	// 			setUsers(result);
+	// 			setLoading(false);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log('Unable to fetch users', err);
+	// 		});
+	// }, [users]);
 
 	// const handleRemoveUser = (userId: number) => {
 	// 	const clonedUsers = [...users];
