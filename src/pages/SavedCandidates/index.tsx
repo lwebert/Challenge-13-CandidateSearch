@@ -1,19 +1,14 @@
-//TODO: Add local storage
 
 import { useEffect, useState } from 'react';
-import { searchGithubUser } from '../../api/API';
+// import { searchGithubUser } from '../../api/API';
 import BounceLoader from 'react-spinners/BounceLoader';
-// import { type CandidateDetails } from '../interfaces/Candidate.interface';
+import { type CandidateDetails } from '../interfaces/Candidate.interface';
 import './SavedCandidates.css';
 
-// type Props = {
-// 	usernames: string[];
-// };
 
 const SavedCandidates = () => {
-	// const SavedCandidates = ({ usernames }: Props) => {
 	const [loading, setLoading] = useState(false);
-	const [users, setUsers] = useState<any[]>([]);
+	const [users, setUsers] = useState<CandidateDetails[]>([]);
 
 	const removeFromStorage = (
 		// e: React.MouseEvent<SVGSVGElement, MouseEvent>,
@@ -22,8 +17,11 @@ const SavedCandidates = () => {
 		userId: number
 	) => {
 		e.preventDefault();
+
+		console.log('user ID: ', userId);
+
 		if (userId !== undefined) {
-			let parsedSavedUsers = [];
+			let parsedSavedUsers: any[] = [];
 			const storedCandidates = localStorage.getItem('savedCandidates');
 
 			if (typeof storedCandidates === 'string') {
@@ -35,11 +33,10 @@ const SavedCandidates = () => {
 				);
 			}
 
-			//TODO: fix the filter from overwritting the entire local storage to empty array []
 			parsedSavedUsers = parsedSavedUsers.filter(
 				(candidate: { id: number }) => {
 					console.log(candidate.id, userId);
-					candidate.id !== userId;
+					return candidate.id !== userId;
 				}
 			);
 
@@ -57,9 +54,11 @@ const SavedCandidates = () => {
 	};
 
 	useEffect(() => {
+		setLoading(true);
 		const savedUsers = localStorage.getItem('savedCandidates');
 		if (savedUsers) {
 			const parsedSavedUsers = JSON.parse(savedUsers);
+			setLoading(false);
 			setUsers(parsedSavedUsers);
 		} else {
 			console.error(

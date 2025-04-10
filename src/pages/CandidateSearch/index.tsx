@@ -1,5 +1,6 @@
 //TODO: Add local storage
 
+import { Plus, Minus } from 'lucide-react';
 import './CanddiateSearch.css';
 import { useState, useEffect } from 'react'; //Gave us this import!
 
@@ -8,7 +9,7 @@ import { searchGithub } from '../../api/API';
 
 import { type CandidateSummary } from '../../interfaces/Candidate.interface';
 import CandidateCard from '../../components/CandidateCard';
-import SavedCandidates from '../SavedCandidates/index';
+// import SavedCandidates from '../SavedCandidates/index';
 
 // type Props = {
 // 	showSavedCandidates: boolean;
@@ -115,15 +116,26 @@ const CandidateSearch = () => {
 			<div>
 				<h1>Candidate Search</h1>
 				{currentUser ? (
-					<div>
-						<CandidateCard username={currentUser.login} />
-						<button onClick={handleRejectUser}>Reject User</button>
+					<div className="container">
+						<div className="card">
+							<CandidateCard username={currentUser.login} />
+						</div>
+						<div className="button-row">
+							<button
+								onClick={handleRejectUser}
+								className="minus-button">
+								<Minus className="button" />
+							</button>
 
-						<button onClick={handleSaveUser}>Save User</button>
+							<button
+								onClick={handleSaveUser}
+								className="plus-button">
+								<Plus className="button" />
+							</button>
+						</div>
 					</div>
 				) : null}
 			</div>
-			{/* )} */}
 		</div>
 	);
 };

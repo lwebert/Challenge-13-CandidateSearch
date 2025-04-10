@@ -38,48 +38,71 @@ const CandidateCard = ({ username }: CandidateProps) => {
 		return null;
 	}
 
-	return (
-		loading ? (
-			<BounceLoader color='#FFFFFF' />
-		) : (
-			<div className="card">
-			<img src={loadedUser?.avatar_url}></img>
-			<h2>{loadedUser?.name ? loadedUser.name : loadedUser?.login}</h2>
-			{/* //TODO: fix this later to always have the "Location: " and such... */}
-			<h3> Location: </h3>
+	console.log('loaded user: ', loadedUser);
+
+	return loading ? (
+		<BounceLoader color="#FFFFFF" />
+	) : (
+		<div>
+			<img
+				src={loadedUser?.avatar_url}
+				style={{
+					borderTopLeftRadius: 25,
+					borderTopRightRadius: 25,
+					aspectRatio: 1,
+					maxHeight: 500,
+				}}></img>
+
+			<h2>
+				Name: {loadedUser?.name ? loadedUser.name : 'No name to render'}
+			</h2>
+			<p>
+				<strong>Username: </strong>
+				{loadedUser.login
+					? loadedUser.login
+					: 'No username found to render.'}
+			</p>
+
+			<p>
+				<strong>Location: </strong>
+				{loadedUser.location
+					? loadedUser.location
+					: 'No location found to render.'}
+			</p>
+
+			{/* <h3>Location: </h3>
 			{loadedUser.location ? (
 				<p>{loadedUser.location}</p>
 			) : (
 				<p>No location found to render</p>
-			)}
+			)} */}
 
+			<p>
+				<strong>Email: </strong>
+				{loadedUser.email
+					? loadedUser.email
+					: 'No email found to render.'}
+			</p>
 
-			{loadedUser.email ? (
-				<p>
-					<strong>Email: </strong>
-					{loadedUser.email}
-				</p>
-			) : (
-				<p>No email found to render</p>
-			)}
-			{loadedUser.company ? (
-				<p>
-					<strong>Company: </strong>
-					{loadedUser.company}
-				</p>
-			) : (
-				<p>No company found to render</p>
-			)}
-			{loadedUser.bio ? (
-				<p>
-					<strong>Bio: </strong>
-					{loadedUser.Bio}
-				</p>
-			) : (
-				<p>No Bio found to render</p>
-			)}
+			<p>
+				<strong>URL: </strong>
+				{loadedUser.html_url
+					? loadedUser.html_url
+					: 'No URL found to render.'}
+			</p>
+
+			<p>
+				<strong>Company: </strong>
+				{loadedUser.company
+					? loadedUser.company
+					: 'No company found to render.'}
+			</p>
+
+			<p>
+				<strong>Bio: </strong>
+				{loadedUser.bio ? loadedUser.bio : 'No bio found to render.'}
+			</p>
 		</div>
-		)
 	);
 };
 
