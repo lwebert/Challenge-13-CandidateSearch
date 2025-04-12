@@ -49,7 +49,6 @@ const CandidateCard = ({ username }: CandidateProps) => {
 				) : (
 					<img
 						className="candidateImg"></img>
-					// <a className="candidateImg">No Avatar to render.</a>
 				)}
 			</div>
 

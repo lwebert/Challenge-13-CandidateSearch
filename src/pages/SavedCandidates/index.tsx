@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { searchGithubUser } from '../../api/API';
 import { Minus } from 'lucide-react';
 
 import BounceLoader from 'react-spinners/BounceLoader';
@@ -12,9 +11,7 @@ const SavedCandidates = () => {
 	const [users, setUsers] = useState<CandidateDetails[]>([]);
 
 	const removeFromStorage = (
-		// e: React.MouseEvent<SVGSVGElement, MouseEvent>,
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-		// e: { preventDefault: () => void },
 		userId: number
 	) => {
 		e.preventDefault();

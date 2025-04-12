@@ -1,32 +1,18 @@
-//TODO: Add local storage
-
 import { Plus, Minus } from 'lucide-react';
 import './CanddiateSearch.css';
-import { useState, useEffect } from 'react'; //Gave us this import!
+import { useState, useEffect } from 'react';
 
-// import { searchGithub, searchGithubUser } from '../api/API'; //Gave us this import!
 import { searchGithub } from '../../api/API';
 
 import { type CandidateSummary } from '../../interfaces/Candidate.interface';
 import CandidateCard from '../../components/CandidateCard/CandidateCard';
-// import SavedCandidates from '../SavedCandidates/index';
 
-// type Props = {
-// 	showSavedCandidates: boolean;
-// };
-// const CandidateSearch = ({ showSavedCandidates }: Props) => {
 const CandidateSearch = () => {
-	// return <h1>CandidateSearch</h1>;
-
-	//useState = Hook (prebuilt in react library) that returns (initializes) 2 things - a state variable (where data is stored) & a state function (to update data in the variable)
 	const [users, setUsers] = useState<CandidateSummary[]>([]); //when page 1st loads, make users an empty array
-	// const [savedUsers, setSavedUsers] = useState<string[]>([]);
 	const [currentUser, setCurrentUser] = useState<
 		CandidateSummary | undefined
 	>(undefined);
-	// const [showSavedCandidates, setShowSavedCandidates] = useState(false);
 
-	//useEffect
 	useEffect(() => {
 		const initialize = async () => {
 			const data = await searchGithub();
@@ -54,11 +40,9 @@ const CandidateSearch = () => {
 			return undefined;
 		}
 		if (currentIndex > users.length) {
-			//TODO: fix this later to have a message pop-up or something display on screen...
 			console.log(
 				'No candidates are available to review, starting over.'
 			);
-			// setCurrentUser(users[0]);
 			return 0;
 		}
 
@@ -80,13 +64,6 @@ const CandidateSearch = () => {
 			return;
 		}
 
-		// const savedUsersClone = [...savedUsers]; //make a copy of this array since it is a readonly variable in the state hook
-		// if (currentUser) {
-		// 	savedUsersClone.push(currentUser.login);
-		// }
-		// setSavedUsers(savedUsersClone);
-		// setCurrentUser(users[currentIndex + 1]);
-
 		let parsedSavedUsers = [];
 		const storedCandidates = localStorage.getItem('savedCandidates');
 
@@ -102,17 +79,8 @@ const CandidateSearch = () => {
 		setCurrentUser(users[currentIndex + 1]);
 	};
 
-	// const handleToggleSelectedUsers = () => {
-	// 	setShowSaveCandidates(!showSavedCandidates);
-	// };
-
 	return (
 		<div>
-			{/* <button onClick={handleToggleSelectedUsers}>{showSavedCandidates ? 'Return To User Search' :'Show Saved Users'} </button> */}
-
-			{/* {showSavedCandidates ? (
-				// <SavedCandidates usernames={savedUsers} />
-			) : ( */}
 			<div>
 				<h1>Candidate Search</h1>
 				{currentUser ? (
@@ -124,7 +92,7 @@ const CandidateSearch = () => {
 							<button
 								onClick={handleRejectUser}
 								className="minus-button">
-								<Minus className="button"/>
+								<Minus className="button" />
 							</button>
 
 							<button

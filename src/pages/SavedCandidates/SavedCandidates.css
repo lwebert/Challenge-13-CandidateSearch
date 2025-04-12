@@ -1,30 +1,7 @@
-/* .table-row-black {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-    background-color: black;
-    color: white;
-}
-
-.table-row-gray {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-    background-color: gray;
-    color: white;
-} */
-
-/* .table-container {
-	display: flex;
-	flex-direction: column;
-    align-items: center;
-    justify-content: center;
-} */
-
 .table-row-image {
-    height: 40px;
-    width: 40px;
-    border-radius: 10px;
+	height: 40px;
+	width: 40px;
+	border-radius: 10px;
 }
 
 .minus-button2 {
@@ -34,9 +11,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 .noCandidates {
-    text-align: center;
+	text-align: center;
 }
