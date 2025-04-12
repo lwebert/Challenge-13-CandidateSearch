@@ -4,6 +4,7 @@ export interface CandidateSummary {
 }
 
 export interface CandidateDetails {
+	readonly id: number;
 	readonly name: string;
 	readonly avatar_url: string;
 	readonly login: string;

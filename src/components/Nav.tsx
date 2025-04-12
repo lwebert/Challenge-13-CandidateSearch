@@ -12,9 +12,6 @@ const Nav = () => {
 
 	return (
 		<nav>
-			<h1>
-				<Link to="/" >Candidate Search</Link>
-			</h1>
 			<ul className="nav nav-tabs">
 				<li className="nav-item">
 					<h2>
@@ -27,15 +24,9 @@ const Nav = () => {
 							}>
 							Home
 						</Link>
-						{/* <button
-						onClick={() => setShowSaveCandidates(false)}
-						style={
-							showSavedCandidates ? styles['button']: styles['button-active'] 
-						}>
-							HOME
-						</button> */}
 					</h2>
 				</li>
+
 				<li className="nav-item">
 					<h2>
 						<Link
@@ -45,40 +36,13 @@ const Nav = () => {
 									? 'nav-link active'
 									: 'nav-link'
 							}>
-								Saved Candidates
-							</Link>
-						{/* <button
-							style={
-								showSavedCandidates ? styles['button-active'] : styles['button']
-							}
-							onClick={() => setShowSaveCandidates(true)}
-						>
-							Potential Candidates
-						</button> */}
+							Saved Candidates
+						</Link>
 					</h2>
 				</li>
 			</ul>
 		</nav>
 	);
 };
-
-// const styles: { [key: string]: any } = {
-// 	button: {
-// 		background: 'inherit',
-// 		color: 'inherit',
-// 		border: 'none',
-// 		padding: 0,
-// 		font: 'inherit',
-// 		outline: 'inherit',
-// 	},
-// 	'button-active': {
-// 		background: 'white',
-// 		color: 'inherit',
-// 		border: 'none',
-// 		padding: 0,
-// 		font: 'inherit',
-// 		outline: 'inherit',
-// 	},
-// };
 
 export default Nav;

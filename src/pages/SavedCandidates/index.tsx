@@ -1,10 +1,11 @@
-
 import { useEffect, useState } from 'react';
 // import { searchGithubUser } from '../../api/API';
-import BounceLoader from 'react-spinners/BounceLoader';
-import { type CandidateDetails } from '../interfaces/Candidate.interface';
-import './SavedCandidates.css';
+import { Minus } from 'lucide-react';
 
+import BounceLoader from 'react-spinners/BounceLoader';
+import { type CandidateDetails } from '../../interfaces/Candidate.interface';
+
+import './SavedCandidates.css';
 
 const SavedCandidates = () => {
 	const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ const SavedCandidates = () => {
 		console.log('user ID: ', userId);
 
 		if (userId !== undefined) {
-			let parsedSavedUsers: any[] = [];
+			let parsedSavedUsers = [];
 			const storedCandidates = localStorage.getItem('savedCandidates');
 
 			if (typeof storedCandidates === 'string') {
@@ -68,49 +69,7 @@ const SavedCandidates = () => {
 		}
 	}, []);
 
-	//TODO: move some of this code up - searchGithubUser...
-	// useEffect(() => {
-	// 	setLoading(true);
-	// 	const init = async () => {
-	// 		const candidates: any[] = [];
-
-	// 		for (let ii = 0; ii < usernames.length; ii++) {
-	// 			const user = await searchGithubUser(usernames[ii]);
-	// 			console.log('Loaded user: ', user);
-	// 			if (user) {
-	// 				candidates.push(user);
-	// 			}
-	// 		}
-
-	// 		return candidates;
-	// 	};
-
-	// 	init()
-	// 		.then((result) => {
-	// 			setUsers(result);
-	// 			setLoading(false);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log('Unable to fetch users', err);
-	// 		});
-	// }, [users]);
-
-	// const handleRemoveUser = (userId: number) => {
-	// 	const clonedUsers = [...users];
-
-	// 	const userIndex = clonedUsers.findIndex((u) => {
-	// 		console.log(u.id === userId);
-	// 		return u.id === userId;
-	// 	});
-	// 	if (userIndex === undefined) {
-	// 		console.log('No index found with userId: ', userId);
-	// 		return;
-	// 	}
-
-	// 	clonedUsers.splice(userIndex, 1);
-
-	// 	setUsers(clonedUsers);
-	// };
+	console.log(users.length);
 
 	return (
 		<div>
@@ -118,14 +77,16 @@ const SavedCandidates = () => {
 
 			{loading ? (
 				<BounceLoader color="#FFFFFF" />
-			) : (
-				<table>
+			) : users.length > 0 ? (
+				<table className="table">
 					<thead>
 						<tr>
 							<th>Image</th>
 							<th>Name</th>
+							<th>Username</th>
 							<th>Location</th>
 							<th>Email</th>
+							<th>URL</th>
 							<th>Company</th>
 							<th>Bio</th>
 							<th>Reject</th>
@@ -144,6 +105,9 @@ const SavedCandidates = () => {
 									{user.name ? user.name : 'No name found.'}
 								</td>
 								<td>
+									{user.login ? user.login : 'No name found.'}
+								</td>
+								<td>
 									{user.location
 										? user.location
 										: 'No location found.'}
@@ -152,6 +116,11 @@ const SavedCandidates = () => {
 									{user.email
 										? user.email
 										: 'No email found.'}
+								</td>
+								<td>
+									{user.html_url
+										? user.html_url
+										: 'No URL found.'}
 								</td>
 								<td>
 									{user.company
@@ -163,80 +132,20 @@ const SavedCandidates = () => {
 								<td>
 									<button
 										onClick={(e) =>
-											// handleRemoveUser(user.id)
 											removeFromStorage(e, user.id)
-										}>
-										{' '}
-										-{' '}
+										}
+										className="minus-button2">
+										<Minus className="button" />{' '}
 									</button>
 								</td>
 							</tr>
 						))}
 					</tbody>
 				</table>
-
-				// <div className="table-container">
-				// 	<div className="table-row-black">
-				// 		<div>Image</div>
-
-				// 		<div>Name</div>
-
-				// 		<div>Location</div>
-
-				// 		<div>Email</div>
-
-				// 		<div>Company</div>
-
-				// 		<div>Bio</div>
-
-				// 		<div>Reject</div>
-				// 	</div>
-				// 	{users.map((user, index) => (
-				// 		<div
-				// 			className={
-				// 				index % 2 === 0
-				// 					? 'table-row-gray'
-				// 					: 'table-row-black'
-				// 			}
-				// 			key={index}>
-				// 			<div>
-				// 				<img
-				// 					src={user?.avatar_url}
-				// 					className="table-row-image"
-				// 				/>
-				// 			</div>
-
-				// 			<div>
-				// 				{user.name ? user.name : 'No Name found.'}
-				// 			</div>
-
-				// 			<div>
-				// 				{user.location
-				// 					? user.location
-				// 					: 'No location found. '}
-				// 			</div>
-
-				// 			<div>{user.email}</div>
-
-				// 			<div>
-				// 				{user.company
-				// 					? user.company
-				// 					: 'No Company listed'}
-				// 			</div>
-
-				// 			<div>
-				// 				{user.bio ? user.bio : 'Nothing to show.'}
-				// 			</div>
-
-				// 			<div>
-				// 				<button
-				// 					onClick={() => handleRemoveUser(user.id)}>
-				// 					-
-				// 				</button>
-				// 			</div>
-				// 		</div>
-				// 	))}
-				// </div>
+			) : (
+				<p className="noCandidates">
+					No candidates have been accepted.
+				</p>
 			)}
 		</div>
 	);

@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react'; //Gave us this import!
 import { searchGithub } from '../../api/API';
 
 import { type CandidateSummary } from '../../interfaces/Candidate.interface';
-import CandidateCard from '../../components/CandidateCard';
+import CandidateCard from '../../components/CandidateCard/CandidateCard';
 // import SavedCandidates from '../SavedCandidates/index';
 
 // type Props = {
@@ -40,7 +40,7 @@ const CandidateSearch = () => {
 					setCurrentUser(result[0]); //grab the first user from the array of all users
 				}
 			})
-			.catch((err: any) => {
+			.catch((err) => {
 				console.log('Error fetching users: ', err);
 			});
 	}, []); //leave dependency array empty - only triggers when page loads the 1st time () since the empty array isn't going to change
@@ -124,7 +124,7 @@ const CandidateSearch = () => {
 							<button
 								onClick={handleRejectUser}
 								className="minus-button">
-								<Minus className="button" />
+								<Minus className="button"/>
 							</button>
 
 							<button
@@ -134,7 +134,11 @@ const CandidateSearch = () => {
 							</button>
 						</div>
 					</div>
-				) : null}
+				) : (
+					<h2>
+						No candidates are available to review, starting over.
+					</h2>
+				)}
 			</div>
 		</div>
 	);

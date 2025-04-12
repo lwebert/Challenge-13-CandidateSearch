@@ -15,7 +15,6 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        // element: <CandidateSearch showSavedCandidates={showSavedCandidates}/>,
         element: <CandidateSearch/>,
       },
       {
