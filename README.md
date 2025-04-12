@@ -26,7 +26,7 @@ To install the application locally, do the following in your terminal:
    `npm i`
 
 ## Usage
-The application is deployed to Render, and can be found [here](...).
+The application is deployed to Render, and can be found [here](https://challenge-13-candidatesearch.onrender.com/).
 
 
 To run the application locally, open an instance of the application in your terminal. 
@@ -53,7 +53,7 @@ Make local changes to push up.
 ## Tests
 The application is working correctly if, when the application first loads, users are directed to the Candidate Search page and a GitHub user's profile appears on the screen. Users should be able to save and remove profiles to local storage and navigate between the Candidate Search and Saved Candidates pages without any errors.
 
-![]().
+![](./src/assets/CandidateSearch.jpg)
 
 ## License
 The application is covered under [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt).   
